@@ -3,19 +3,19 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import Link from "next/link"
 import { DefaultValues, FieldValues, Path, SubmitHandler, UseFormReturn, useForm } from "react-hook-form"
-import type { ZodType } from "zod"
+import type { ZodSchema } from "zod"
 
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/form"
 import { Input } from "./ui/input"
 import { FIELD_NAMES, FIELD_TYPES } from "@/constants"
 import { cn } from "@/lib/utils"
-import { ImageUpload } from "./ImageUpload"
-import { Button } from "./ui/button"
+
 import { toast } from "sonner"
 import { useRouter } from "next/navigation"
+import { Button } from "./ui/button"
 
 interface Props<TFieldValues extends FieldValues> {
-  schema: ZodType<TFieldValues, any, TFieldValues>
+  schema: ZodSchema
   defaultValues: DefaultValues<TFieldValues>
   onSubmit: (data: TFieldValues) => Promise<{ success: boolean; error?: string }>
   type: "SIGN_IN" | "SIGN_UP"
