@@ -7,12 +7,22 @@ const imagekit = new ImageKit({
     urlEndpoint: config.env.imagekit.urlEndpoint
 })
 
+const corsHeaders = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+}
+
 export const GET = async () => {
     try {
         const authenticationParameters = imagekit.getAuthenticationParameters()
-        return NextResponse.json(authenticationParameters)
+        return NextResponse.json(authenticationParameters, { headers: corsHeaders })
     } catch (error) {
         console.error("Error generating authentication parameters:", error)
-        return NextResponse.json({ error: "Failed to generate authentication parameters" }, { status: 500 })
+        return NextResponse.json({ error: "Failed to generate authentication parameters" }, { status: 500, headers: corsHeaders })
     }
+}
+
+export const OPTIONS = async () => {
+    return NextResponse.json({}, { headers: corsHeaders })
 }
