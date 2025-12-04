@@ -13,6 +13,7 @@ import { cn } from "@/lib/utils"
 import { toast } from "sonner"
 import { useRouter } from "next/navigation"
 import { Button } from "./ui/button"
+import { ImageUpload } from "./ImageUpload"
 
 interface Props<TFieldValues extends FieldValues> {
   schema: ZodSchema
