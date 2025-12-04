@@ -17,7 +17,7 @@ const ONE_MONTH_IN_MS = 30 * ONE_DAY_IN_MS;
 
 const getUserState = async (email: string): Promise<UserState> => {
   const user = await db.select().from(users).where(eq(users.email , email)).limit(1)
-  if(user.length === 0) return;
+  if(user.length === 0) return "active";
 
   const lastActivityDate = new Date(user[0].lastActivityDate);
   const now = new Date();

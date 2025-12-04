@@ -11,11 +11,11 @@ import { toast } from "sonner";
 import { success } from "zod";
 import { redirect } from "next/navigation";
 import ratelimit from "../ratelimit";
-import { Client } from "@upstash/workflow";
+import { Client } from "@upstash/qstash";
 import config from "../config";
 
 const client = new Client({
-    url: config.env.qstashUrl,
+    baseUrl: config.env.qstashUrl,
     token: config.env.qstashToken,
 })
 
@@ -62,7 +62,7 @@ export const signUp = async (params: AuthCredentials) => {
             universityId,
             password:hashedPassword,
         })
-        await client.trigger({
+        await client.publishJSON({
             url: `${config.env.prodApiEndpoint}/api/workflows/onboarding`,
             body: {
                 email,
